@@ -19,9 +19,9 @@ module.exports = {
   devServer:{
     proxy:{
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://mall-pre.springboot.cn',
         // 路径不能加上public不然会获取不到
-        pathRewrite:{'^/api':'/mock'},
+        pathRewrite:{'^/api':''},
         ws: true,//用于支持webSocket
         // changeOrigin: true 用于控制请求头中的host值
       },

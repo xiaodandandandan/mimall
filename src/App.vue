@@ -8,16 +8,18 @@
 import axios from 'axios'
 export default {
   name: 'App',
-  mounted() {
+  /* mounted() {
     //本地集成mockjs实现数据mock
     axios.get('/user/login').then(res=>{
       console.log(res)
     })
-  },
+  }, */
 }
 </script>
 
-<style>
+<style lang="scss">
+@import './assets/scss/base.scss';
+@import './assets/scss/reset.scss';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

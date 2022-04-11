@@ -22,7 +22,7 @@ axios.interceptors.response.use((response) => {
   }else if(res.status === 10){
     router.push('/#/login')
   }else{
-    alert(res.msg);
+    //alert(res.msg);
   }
 },(error) => {
   let res = error.response;
