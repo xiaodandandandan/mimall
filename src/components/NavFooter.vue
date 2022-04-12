@@ -62,8 +62,7 @@ export default {
 @import "../assets/scss/mixin.scss";
 .footer {
   width: 100%;
-  background-color: #eee;
-  margin-top: 300px;
+  background-color: #fff;
   .service {
     @include flex();
     height: 84px;
@@ -81,15 +80,16 @@ export default {
       display: inline-block;
       width: 1px;
       height: 30px;
-      background-color: #fff;
+      background-color: #e5e5e5;
     }
   }
   .footer-info {
-    height: 234px;
+    height: 231px;
     background-color: #333;
     color: #999;
     text-align: center;
     font-size: 14px;
+    border-top: 3px solid #ff6600;
     .footer-logo {
       .logo-img {
         margin-top: 46px;

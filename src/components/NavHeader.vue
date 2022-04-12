@@ -224,7 +224,7 @@ export default {
                             /* 重置qrcode行高 1倍 */
                             line-height: 1;
                             overflow: hidden;
-                            z-index: 2;
+                            z-index: 10;
                             /* 设置过渡效果 */
                             transition: height .2s;
                             img{

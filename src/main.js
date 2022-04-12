@@ -5,6 +5,7 @@ import router from './router/index'
 import './assets/style/iconfont.css'
 import axios from 'axios'
 
+
 //mock开关
 const mock = true
 if(mock){
