@@ -372,8 +372,7 @@ export default {
                                     width: 1226px;
                                     height: 100%;
                                     margin: 0 auto;
-                                    @include flex();
-                                    
+                                    @include flex();                                 
                                     .item{
                                         padding: 0 14px;
                                         .item-link{
