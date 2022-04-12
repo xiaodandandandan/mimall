@@ -89,7 +89,7 @@ export default {
     background-color: #333;
     color: #999;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     .footer-logo {
       .logo-img {
         margin-top: 46px;
@@ -98,7 +98,7 @@ export default {
       span {
         display: block;
       }
-      margin-bottom: 13px;
+      margin-bottom: 15px;
     }
     .footer-link {
       a {
@@ -108,6 +108,7 @@ export default {
       span {
         margin: 0 10px;
       }
+       margin-bottom: 5px;
     }
     .copyright {
       .domain {
