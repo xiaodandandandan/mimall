@@ -29,13 +29,13 @@
                     <a href="javascript:;" class="mini-cart">
                         <em class="iconfont">&#xe600;</em>
                         购物车
-                        <span class="mini-cart-num">(0)</span>
+                        <span class="mini-cart-num">({{cartCount}})</span>
                     </a>
                 </div>
                 <!-- 用户信息容器 -->
                 <div class="siteUserInfo">
-                    <a href="" class="item" @click="login" v-if="!username">登录</a>
-                    <a href="" class="item" @click="login" v-if="!username">注册</a>
+                    <router-link to="/login" class="item" v-if="!username">登录</router-link>
+                    <router-link to="/login" class="item" v-if="!username">注册</router-link>
                     <a href="" class="item" v-if="username">{{username}}</a>
                     <a href="" class="item" @click="logout" v-if="username">退出</a>
                     <a href="" class="item" v-if="username">我的订单</a>
@@ -106,12 +106,12 @@
 
 <script>
 import axios from 'axios'
+import { mapState,mapMutations } from 'vuex'
 export default {
     name:'NavHeader',
     data() {
         return {
             phoneList:[],
-            username:'',
             xiaomiImgurl:'imgs/xiaomi12Pro1.webp',
             TVImgurl:'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6511d77270e94146c0b1f96b66d8cc58.png?thumb=1&w=160&h=110&f=webp&q=90'
         }
@@ -121,6 +121,9 @@ export default {
             if(!val) return '0.00';
             return '￥' + val.toFixed(2) + '元';
         }
+    },
+    computed:{
+        ...mapState(['username','cartCount'])
     },
     mounted() {
         this.getProductList()
@@ -136,10 +139,7 @@ export default {
                      pageSize:6
                 }
             }).then(res=>{
-                //   if(res.list.length > 6){
-                //       this.phoneList = res.list.slice(0,6)
-                //   }
-                this.phoneList = res.list
+                    this.phoneList = res.list
                 }
             )
         },
@@ -147,9 +147,13 @@ export default {
             this.$router.push('/cart')
         },
         logout(){
-            this.$router.push('/')
-        }
-
+            axios.post('/user/logout').then(res=>{
+                this.$cookie.set('userId','',{expires:'-1'})
+                this.saveUserName('')
+                this.saveCartCount('0')
+            })
+        },
+        ...mapMutations(['saveUserName','saveCartCount'])
     },
 }
 </script>

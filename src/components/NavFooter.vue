@@ -43,7 +43,7 @@
         >
       </div>
       <div class="copyright">
-        Copyright ©2020 <span class="domain">mi.futurefe.com</span> All Rights
+        Copyright ©2022 <span class="domain">mi.futurefe.com</span> All Rights
         Reserved.
       </div>
     </div>

@@ -4,7 +4,7 @@
       <div class="title">手机</div>
       <div class="list">
         <div class="aside">
-          <img v-lazy="'imgs/phone.webp'" alt="" />
+          <a href="/#/product/35"> <img v-lazy="'imgs/phone.webp'" /></a>
         </div>
         <ul class="product-list">
           <li class="item" v-for="item of phoneList" :key="item.id">

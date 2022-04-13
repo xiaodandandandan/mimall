@@ -54,7 +54,7 @@ mockjs较方便 没有发出真的请求 在代码层面拦截 通过语法可�
 
 ## 图片懒加载
 vue-lazyload
-
+注：在swiper插件中使用懒加载自动轮播会出现空白页
 ```
 //main.js中全局加载
 import VueLazyLoad from 'vue-lazyload'

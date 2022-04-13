@@ -8,12 +8,23 @@
 import axios from 'axios'
 export default {
   name: 'App',
-  /* mounted() {
-    //本地集成mockjs实现数据mock
-    axios.get('/user/login').then(res=>{
-      console.log(res)
-    })
-  }, */
+   mounted() {
+    this.getUser();
+    this.getCartCount();
+  }, 
+  methods: {
+    getUser(){
+      axios.get('/user').then(res=>{
+        //vuex
+        this.$store.commit('saveUserName',res.username)
+      })
+    },
+    getCartCount(){
+      axios.get('/carts/products/sum').then(res=>{
+        this.$store.commit('saveCartCount',res)
+      })
+    }
+  },
 }
 </script>
 

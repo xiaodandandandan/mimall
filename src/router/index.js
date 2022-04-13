@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../pages/Home.vue'
 import Index from '../pages/index/Index.vue'
@@ -8,7 +9,10 @@ import Order from '../pages/order/Order'
 import OrderList from '../pages/order/OrderList'
 import OrderConfirm from '../pages/order/OrderConfirm'
 import OrderPay from '../pages/order/OrderPay'
-import Login from '../pages/Login'
+import Login from '../pages/Login.vue'
+
+Vue.use(VueRouter)
+
 export default new VueRouter({
     routes:[
         {

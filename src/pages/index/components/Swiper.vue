@@ -4,7 +4,7 @@
     <swiper :options="swiperOption" class="swiper">
       <swiper-slide v-for="(item,index) of slideList" :key="index">
         <a :href="'/#/product/'+item.id">
-          <img v-lazy="item.img" class="swiper-img" />
+          <img :src="item.img" class="swiper-img" />
         </a>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
@@ -44,29 +44,21 @@ export default {
           clickable: true,
         },
         autoplay: true,
-        loop: true,
+        loop: true
       },
       slideList: [
         {
           id: "42",
-          img: "imgs/slider/slide-1.jpg",
+          img: "/imgs/slider/slide-4.jpg",
         },
         {
           id: "45",
-          img: "imgs/slider/slide-2.jpg",
+          img: "/imgs/slider/slide-2.jpg",
         },
         {
           id: "46",
-          img: "imgs/slider/slide-3.jpg",
-        },
-        {
-          id: "",
-          img: "imgs/slider/slide-4.jpg",
-        },
-        {
-          id: "",
-          img: "imgs/slider/slide-1.jpg",
-        },
+          img: "/imgs/slider/slide-3.jpg",
+        }
       ]
     };
   },
