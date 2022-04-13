@@ -1,44 +1,47 @@
 <template>
   <div class="container">
       <ul class="ads-list">
-        <li class="item">
-          <a href="javascript:;">
-            <img src="/imgs/ads/ads-1.png" alt="">
-          </a>
-        </li>
-        <li class="item">
-          <a href="javascript:;">
-            <img src="/imgs/ads/ads-1.png" alt="">
-          </a>
-        </li>
-        <li class="item">
-          <a href="javascript:;">
-            <img src="/imgs/ads/ads-3.png" alt="">
-          </a>
-        </li>
-        <li class="item">
-          <a href="javascript:;">
-            <img src="/imgs/ads/ads-3.png" alt="">
+        <li class="item" v-for="ad in adsList" :key="ad.id">
+          <a :href="'/#/product/'+ad.id">
+            <img v-lazy="ad.img">
           </a>
         </li>
       </ul>
       <div class="banner">
-        <a href="https://www.mi.com/redmik40s"><img src="/imgs/banner.webp" alt=""></a>
+        <a href="https://www.mi.com/redmik40s"><img v-lazy="'/imgs/banner.webp'" alt=""></a>
       </div>
   </div>
 </template>
 
 <script>
 export default {
-    name:'IndexAds'
+    name:'IndexAds',
+    data() {
+      return {
+        adsList:[
+          {
+            id:33,
+            img:'imgs/ads/ads-1.png'
+          },{
+            id:48,
+            img:'imgs/ads/ads-3.png'
+          },{
+            id:45,
+            img:'imgs/ads/ads-1.png'
+          },{
+            id:47,
+            img:'imgs/ads/ads-3.png'
+          }
+        ]
+      }
+    },
 }
 </script>
 
 <style lang="scss" scoped>
   @import "@/assets/scss/mixin.scss";
   .container{
-    position: relative;
-    top:-80px;
+    margin-top: 50px;
     .ads-list{
       @include flex();
       .item{

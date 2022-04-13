@@ -1,9 +1,10 @@
 <template>
   <div class="container">
+    <nav-aside/>
     <swiper :options="swiperOption" class="swiper">
-      <swiper-slide v-for="item of slideList" :key="item.id">
-        <a href="javascript:;">
-          <img :src="item.img" alt="" class="swiper-img" />
+      <swiper-slide v-for="(item,index) of slideList" :key="index">
+        <a :href="'/#/product/'+item.id">
+          <img v-lazy="item.img" class="swiper-img" />
         </a>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
@@ -23,11 +24,13 @@
 //局部使用swiper
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+import NavAside from '@/components/NavAside'
 export default {
   name: "IndexSwiper",
   components: {
     Swiper,
     SwiperSlide,
+    NavAside 
   },
   data() {
     return {
@@ -74,12 +77,9 @@ export default {
 .container {
   height: 460px;
   position: relative;
+  z-index: 2;
   top: -100px;
   bottom: 0;
-  .swiper >>> .swiper-pagination-bullet-active {
-    background: #fff;
-  }
-
   img {
     width: 100%;
     height: 100%;

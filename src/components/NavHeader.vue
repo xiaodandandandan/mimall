@@ -59,7 +59,7 @@
                                     <li class="item" v-for="phone of phoneList" :key="phone.id" >
                                         <a href="#" class="item-link" target="_blank">
                                             <div class="item-image">
-                                                <img :src="phone.mainImage" :alt="phone.subtitle">
+                                                <img v-lazy="phone.mainImage" :alt="phone.subtitle">
                                             </div>
                                             <div class="item-title">{{phone.name}}</div>
                                             <p class="price">{{phone.price  | currency}}</p>
@@ -78,7 +78,7 @@
                                     <li class="item" v-for="phone of phoneList" :key="phone.id" >
                                         <a :href="'/#/product/'+phone.id" class="item-link" target="_blank">
                                             <div class="item-image">
-                                                <img :src="phone.mainImage" :alt="phone.subtitle">
+                                                <img v-lazy="phone.mainImage" :alt="phone.subtitle">
                                             </div>
                                             <div class="item-title">{{phone.name}}</div>
                                             <p class="price">{{phone.price  | currency}}</p>
@@ -205,7 +205,6 @@ export default {
                                 height: 148px;
                                 display: block;
                             }
-
                         }
                         .appcode{
                             /* 绝对定位脱离文档流 */
@@ -312,6 +311,7 @@ export default {
             width: 100%;
             height:100px;
             position: relative;
+            z-index: 10;
             .container{
                 height:100px;
                 @include flex();

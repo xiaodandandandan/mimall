@@ -14,7 +14,7 @@
             <ul v-for="(item,index) of menuList" :key="index">
               <li v-for="(sub,index) of item" :key="index">
                 <a :href="sub? '/#/product/'+sub.id :''">
-                  <img :src="sub? sub.img : 'imgs/item-box-1.png'" alt="">
+                  <img v-lazy="sub? sub.img : 'imgs/item-box-1.png'" alt="">
                   {{sub? sub.name : '小米9'}}
                 </a>
               </li>
@@ -117,8 +117,8 @@ export default {
     width: 127px;
     height: 100px;
     position: relative;
-    left:154px;
-    top:-100px;
+    left:92px;
+    top:0px;
     .link-category{
       display: block;
       padding: 40px 10px 38px;
@@ -132,7 +132,7 @@ export default {
       position: absolute;
       left: -92px;
       top:100px;
-      z-index:4;
+      z-index:2;
       .category-list{
         height: 420px;
         border: 0;

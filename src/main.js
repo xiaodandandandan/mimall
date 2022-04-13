@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueLazyLoad from 'vue-lazyload'
 import VueRouter from 'vue-router'
 import router from './router/index'
 import './assets/style/iconfont.css'
@@ -33,6 +34,9 @@ axios.interceptors.response.use((response) => {
 
 Vue.use(VueRouter)
 Vue.use(axios)
+Vue.use(VueLazyLoad,{
+  loading:'imgs/loading-svg/loading-bubbles.svg'
+})
 Vue.config.productionTip = false
 
 

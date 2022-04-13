@@ -4,18 +4,23 @@
       <div class="title">手机</div>
       <div class="list">
         <div class="aside">
-          <img src="imgs/phone.webp" alt="" />
+          <img v-lazy="'imgs/phone.webp'" alt="" />
         </div>
         <ul class="product-list">
           <li class="item" v-for="item of phoneList" :key="item.id">
-            <a :href="'/#/product/'+item.id">
-              <img :src="item.mainImage" alt="" />
+            <div class="item-con">
+              <a :href="'/#/product/'+item.id"><img v-lazy="item.mainImage" alt="" /></a>
               <div class="item-info">
                 <h3 >{{item.name}}</h3>
                 <p>{{item.subtitle}}</p>
-                <p class="price">{{item.price}}起</p>
+                <p 
+                  class="price" 
+                  @click="addCart(item.id)">
+                    {{item.price}}起
+                    <i class="iconfont">&#xe600;</i>
+                </p>
               </div>
-            </a>
+            </div>
           </li>
         </ul>
       </div>
@@ -29,7 +34,8 @@ export default {
   name: "IndexProductList",
   data() {
     return {
-      phoneList:[]
+      phoneList:[],
+      showModal:false
     }
   },
   mounted() {
@@ -45,6 +51,19 @@ export default {
       }).then(res=>{
           this.phoneList = res.list.slice(6,14);
       })
+    },
+    addCart(id){
+      this.showModal = true;
+      this.$emit('modal',this.showModal)
+      return
+     /*  axios.post('/carts',{
+        productId:id,
+        selected:true
+      }).then(res=>{
+
+      }).catch(res=>{
+        this.showModal = true;
+      }) */
     }
   },
 };
@@ -57,7 +76,7 @@ export default {
 .product {
   width: 100%;
   height: 740px;
-  margin-top: -40px;
+  margin-top: 40px;
   background-color: #f5f5f5;
   .container {
     .title {
@@ -98,8 +117,7 @@ export default {
             top:-5px;
             box-shadow: 5px 6px 5px 5px rgba(202, 196, 196, 0.3),-5px 0 5px 5px rgba(202, 196, 196, 0.3);
           }
-          a {
-            display: inline-block;
+          .item-con{
             height: 260px;
             padding: 20px 0;
           }

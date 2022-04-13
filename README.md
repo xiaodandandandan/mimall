@@ -52,14 +52,29 @@ API：cookie没有特定的API Storage有对应的API
 easy-mock 加载速度过慢
 mockjs较方便 没有发出真的请求 在代码层面拦截 通过语法可以做到随机模拟数据
 
+## 图片懒加载
+vue-lazyload
+
+```
+//main.js中全局加载
+import VueLazyLoad from 'vue-lazyload'
+
+Vue.use(VueLazyLoad,{
+  loading:'imgs/loading-svg/loading-bubbles.svg'
+})
+//在图片标签中使用
+<img v-lazy="ad.img">
+```
+
 
 ## 组件拆分
 
 ### 首页组件 Home.vue
 Navheader.vue(common)
-NavAside.vue(common)
-Menu.vue
-Swiper.vue
-Ads.vue
-Product.vue
 NavFooter.vue(common)
+Index.vue
+    NavAside.vue(common)
+    Swiper.vue
+    Ads.vue
+    ProductList.vue
+
