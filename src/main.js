@@ -24,7 +24,7 @@ axios.interceptors.response.use((response) => {
   if(res.status == 0){
     return res.data;
   }else if(res.status == 10){
-    //router.push('/login')
+    router.push('/login')
     return Promise.reject(res);
   }else{
     return Promise.reject(res);

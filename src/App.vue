@@ -9,18 +9,21 @@ import axios from 'axios'
 export default {
   name: 'App',
    mounted() {
-    this.getUser();
-    this.getCartCount();
+     if(this.$cookie.get('userId')){
+       console.log('aaaaaa')
+        this.getUser();
+        this.getCartCount();
+     }
   }, 
   methods: {
     getUser(){
-      axios.get('/user').then(res=>{
+      axios.get('/user').then((res={})=>{
         //vuex
         this.$store.commit('saveUserName',res.username)
       })
     },
     getCartCount(){
-      axios.get('/carts/products/sum').then(res=>{
+      axios.get('/carts/products/sum').then((res=0)=>{
         this.$store.commit('saveCartCount',res)
       })
     }

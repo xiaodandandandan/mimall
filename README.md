@@ -65,7 +65,21 @@ Vue.use(VueLazyLoad,{
 //在图片标签中使用
 <img v-lazy="ad.img">
 ```
-
+## swiper 插件样式更改
+需要使用样式穿透
+```
+.swiper-container-horizontal > .swiper-pagination-bullets{
+  bottom:0;
+  /deep/ .swiper-pagination-bullet {
+    border-radius: 0;
+    width: 20px;
+    height: 2px;
+  } 
+  /deep/ .swiper-pagination-bullet-active{
+    background-color: #666;
+  }
+}
+```
 
 ## 组件拆分
 
