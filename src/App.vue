@@ -10,7 +10,6 @@ export default {
   name: 'App',
    mounted() {
      if(this.$cookie.get('userId')){
-       console.log('aaaaaa')
         this.getUser();
         this.getCartCount();
      }
@@ -34,7 +33,6 @@ export default {
 <style lang="scss">
 @import './assets/scss/base.scss';
 @import './assets/scss/reset.scss';
-@import './assets/scss/mixin.scss';
 @import './assets/scss/config.scss';
 @import './assets/scss/button.scss';
 </style>

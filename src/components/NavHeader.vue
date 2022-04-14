@@ -47,7 +47,7 @@
             <div class="container">
                 <!-- 创建头部logo -->
                 <div class="site-logo">
-                    <a href="//www.mi.com/index.html" title="小米官网" class="logo">小米官网</a>
+                    <a href="/#/index" title="小米官网" class="logo">小米官网</a>
                 </div>
                 <!-- 头部导航栏容器 -->
                 <div class="site-header-nav">

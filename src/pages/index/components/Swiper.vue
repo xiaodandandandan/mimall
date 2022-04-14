@@ -9,11 +9,11 @@
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
       <div
-        class="swiper-button-prev swiper-button-white"
+        class="swiper-button-prev"
         slot="button-prev"
       ></div>
       <div
-        class="swiper-button-next swiper-button-white"
+        class="swiper-button-next"
         slot="button-next"
       ></div>
     </swiper>
@@ -76,13 +76,25 @@ export default {
     width: 100%;
     height: 100%;
   }
-
+  .swiper-container-horizontal > .swiper-pagination-bullets{
+        /deep/ .swiper-pagination-bullet-active{
+          background-color: #666;
+        }
+      }
   .swiper-button-prev {
     left: 244px;
-    opacity: 0.7;
+    opacity: 0.5;
+    &:after{
+      color: #666;
+      font-size: 30px;
+    }
   }
   .swiper-button-next {
-    opacity: 0.7;
+    opacity: 0.5;
+    &:after{
+      color: #666;
+      font-size: 30px;
+    }
   }
   .swiper-pagination {
     text-align: right;

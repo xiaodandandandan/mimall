@@ -53,17 +53,14 @@ export default {
       })
     },
     addCart(id){
-      this.showModal = true;
-      this.$emit('modal',this.showModal)
-      return
-     /*  axios.post('/carts',{
+     axios.post('/carts',{
         productId:id,
         selected:true
-      }).then(res=>{
-
-      }).catch(res=>{
+      }).then((res={cartProductVoList:0})=>{
         this.showModal = true;
-      }) */
+        this.$emit('modal',this.showModal)
+        this.$store.commit('saveCartCount',res.cartTotalQuantity)
+      })
     }
   },
 };
