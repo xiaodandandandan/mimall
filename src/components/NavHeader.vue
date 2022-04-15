@@ -325,7 +325,7 @@ export default {
                     margin-top: 22px;
                     .logo{
                         position: relative;
-                        @include bgImg(56px,56px,'../../public/imgs/logo-mi2.png');
+                        @include bgImg(56px,56px,'/imgs/logo-mi2.png');
                         text-indent: -9999px;
                     }
                 }

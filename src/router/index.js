@@ -20,6 +20,7 @@ export default new VueRouter({
             name:'home',
             component:Home,
             redirect:'/index',
+            // 斜杠代表根路径
             children:[
                 {
                     path:'/index',
@@ -46,15 +47,15 @@ export default new VueRouter({
             component:Order,
             children:[
                 {
-                    path:'/list',
+                    path:'list',
                     name:'order-list',
                     component:OrderList,
                 },{
-                    path:'/confirm',
+                    path:'confirm',
                     name:'order-confirm',
                     component:OrderConfirm,
                 },{
-                    path:'/pay',
+                    path:'pay',
                     name:'order-pay',
                     component:OrderPay,
                 }
