@@ -9,7 +9,8 @@ import axios from 'axios'
 export default {
   name: 'App',
    mounted() {
-     if(this.$cookie.get('userId')){
+     console.log(this.$cookies.get('userId'));
+     if(this.$cookies.get('userId')){
         this.getUser();
         this.getCartCount();
      }

@@ -59,15 +59,20 @@ export default {
           username,
           password
         }).then((res)=>{
-          this.$cookie.set('userId',res.id,{expires:'1M'});
+          this.$cookies.set('userId',res.id);
           //console.log(res);
           //vuex 保存用户名
           this.$store.commit('saveUserName',res.username)
-          this.$router.push('/index');
+          this.$router.push({
+            name:'index',
+            params:{
+              from:'login'
+            }
+          })
         })
       },
       register(){
-        alert('尚未开发')
+        this.$message.info('尚未开发')
         /* axios.post('/user/register',{
           username:'张小蛋疯子',
           password:'0511',

@@ -10,8 +10,9 @@
 }
 
 .btn-default{
-    background-color: #B0B0B0;
-    color:$colorG;
+    background-color: #fff;
+    color:$colorD;
+    border: 1px solid $colorD;
 }
 .btn-large{
     width: 202px;

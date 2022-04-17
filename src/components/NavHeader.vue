@@ -36,9 +36,9 @@
                 <div class="siteUserInfo">
                     <router-link to="/login" class="item" v-if="!username">登录</router-link>
                     <router-link to="/login" class="item" v-if="!username">注册</router-link>
-                    <a href="" class="item" v-if="username">{{username}}</a>
-                    <a href="" class="item" @click="logout" v-if="username">退出</a>
-                    <a href="" class="item" v-if="username">我的订单</a>
+                    <a href="javascript:;" class="item" v-if="username">{{username}}</a>
+                    <a href="javascript:;" class="item" @click="logout" v-if="username">退出</a>
+                    <a href="/#/order/list" class="item" v-if="username">我的订单</a>
                 </div>
             </div>
         </div>
@@ -127,6 +127,9 @@ export default {
     },
     mounted() {
         this.getProductList()
+        ///console.log(this.$route.params);
+        const params = this.$route.params;
+        if(params && params.from === 'login') this.getCartCount()
     },
     methods: {
         login(){
@@ -147,10 +150,16 @@ export default {
             this.$router.push('/cart')
         },
         logout(){
-            axios.post('/user/logout').then(res=>{
-                this.$cookie.set('userId','',{expires:'-1'})
+            axios.post('/user/logout').then(()=>{
+                this.$message.success('退出成功！')
+                this.$cookies.set('userId','')
                 this.saveUserName('')
                 this.saveCartCount('0')
+            })
+        },
+        getCartCount(){
+            axios.get('/carts/products/sum').then((res=0)=>{
+                this.$store.commit('saveCartCount',res)
             })
         },
         ...mapMutations(['saveUserName','saveCartCount'])
@@ -322,7 +331,6 @@ export default {
                 /* logo */
                 .site-logo{
                     width: 62px;
-                    margin-top: 22px;
                     .logo{
                         position: relative;
                         @include bgImg(56px,56px,'/imgs/logo-mi2.png');
@@ -423,7 +431,6 @@ export default {
                     // float: right;
                     width: 294px;
                     height: 50px;
-                    margin-top: 25px;
                     .input{
                         outline: none;
                         font-size: 12px;

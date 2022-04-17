@@ -11,10 +11,12 @@ module.exports = {
     },
   },
   lintOnSave:false,
+  productionSourceMap:true,
   chainWebpack:(config)=> {
     config.resolve.alias
       .set('@',resolve('src'))
       .set('imgs', resolve('public/imgs'))
+    config.plugins.delete('prefetch');
   },
   devServer:{
     host:'localhost',
