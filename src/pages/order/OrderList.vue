@@ -6,39 +6,48 @@
       </template>
     </order-header>
     <div class="wrapper">
+      <Nodata v-if="list.length===0"></Nodata>
       <div class="container">
-          <div class="order-item" v-for="(order,index) of list" :key="index">
-            <div class="item-header clearfix">
-              <div class="item-info fl">
-                  <span>{{order.createTime}}</span><span class="spacer">|</span>
-                  <span>{{order.receiverName}}</span><span class="spacer">|</span>
-                  <span>订单号：{{order.orderNo}}</span><span class="spacer">|</span>
-                  <span>{{order.paymentTypeDesc}}</span>
-              </div>
-              <div class="item-price fr">
-                应付金额：<span>{{order.payment}}</span>元
-              </div>
+        <loading v-if="loading"></loading>
+        <div class="order-item" v-for="(order,index) of list" :key="index">
+          <div class="item-header clearfix">
+            <div class="item-info fl">
+                <span>{{order.createTime}}</span><span class="spacer">|</span>
+                <span>{{order.receiverName}}</span><span class="spacer">|</span>
+                <span>订单号：{{order.orderNo}}</span><span class="spacer">|</span>
+                <span>{{order.paymentTypeDesc}}</span>
             </div>
-            <div class="item-body clearfix">
-               <div class="good-box fl">
-                <div class="good-list" v-for="(item,index) of order.orderItemVoList" :key="index">
-                  <img v-lazy="item.productImage">
-                  <div class="desc">
-                    <span>{{item.productName}}</span><br>
-                    <span>{{item.totalPrice + ' X ' + item.quantity}}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="good-state fr" v-if="order.status == 20">
-                <span>{{order.statusDesc}}</span>
-                <!-- <span class="iconfont">&#xe687;</span> -->
-              </div>
-              <div class="good-state fr" v-else>
-                <span @click="goPay(order.orderNo)">{{order.statusDesc}}</span>
-              </div>
+            <div class="item-price fr">
+              应付金额：<span>{{order.payment}}</span>元
             </div>
           </div>
-          
+          <div class="item-body clearfix">
+              <div class="good-box fl">
+              <div class="good-list" v-for="(item,index) of order.orderItemVoList" :key="index">
+                <img v-lazy="item.productImage">
+                <div class="desc">
+                  <span>{{item.productName}}</span><br>
+                  <span>{{item.totalPrice + ' X ' + item.quantity}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="good-state fr" v-if="order.status == 10">
+              <span  @click="goPay(order.orderNo)">{{order.statusDesc}}</span>
+              <!-- <span class="iconfont">&#xe687;</span> -->
+            </div>
+            <div class="good-state fr" v-else>
+              <span>{{order.statusDesc}}</span>
+            </div>
+          </div>
+        </div>
+        <el-pagination
+          class="pagination"
+          background
+          :pageSize='pageSize'
+          layout="prev, pager, next"
+          :total="total"
+          @current-change="handleChange">
+        </el-pagination>   
       </div>
     </div>
   </div>
@@ -46,13 +55,20 @@
 
 <script>
 import OrderHeader from '@/components/OrderHeader'
+import loading from '@/components/Loading'
+import Nodata from '@/components/Nodata'
+
 import axios from 'axios'
 export default {
     name:'OrderList',
-    components:{OrderHeader},
+    components:{OrderHeader,loading,Nodata},
     data() {
       return {
         list:[],
+        loading:true,
+        pageSize:10,
+        pageNum:1,
+        total:0
       }
     },
     mounted() {
@@ -60,8 +76,17 @@ export default {
     },
     methods: {
       getOrderList(){
-        axios.get('/orders').then(res=>{
+        axios.get('/orders',{
+          params:{
+            pageNum:this.pageNum
+          }
+        }).then(res=>{
+          this.loading = false
           this.list = res.list;
+          this.total = res.total
+          // this.lis=[]
+        }).catch(()=>{
+          this.loading = false
         })
       },
       goPay(orderNo){
@@ -71,6 +96,10 @@ export default {
             orderNo
           }
         })
+      },
+      handleChange(pageNum){
+        this.pageNum = pageNum
+        this.getOrderList()
       }
     },
 }
@@ -83,6 +112,12 @@ export default {
     background-color: #f5f5f5;
     .container{
       padding: 31px 0 110px;
+      /deep/.el-pagination.is-background .el-pager li:not(.disabled).active{
+        background-color:#ff6600
+      }
+      .pagination{
+        text-align:right
+      }
       .order-item{
         width: 100%;
         background-color: #fff;

@@ -58,16 +58,16 @@ export default new VueRouter({
                     path:'pay',
                     name:'order-pay',
                     component:OrderPay,
+                },{
+                    path:'alipay',
+                    name:'alipay',
+                    component:() => import('../pages/Alipay')
                 }
             ]
         },{
             path:'/login',
             name:'login',
             component:Login,
-        },{
-            path:'/alipay',
-            name:'alipay',
-            component:() => import('../pages/Alipay')
         }
     ]
 })

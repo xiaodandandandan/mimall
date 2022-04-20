@@ -6,6 +6,7 @@ import { Message } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router/index'
 import store from './store'
+import {Pagination} from 'element-ui'
 import './assets/style/iconfont.css'
 import axios from 'axios'
 
@@ -38,7 +39,7 @@ axios.interceptors.response.use((response) => {
   return Promise.reject(error);
 })
 
-
+Vue.use(Pagination)
 Vue.use(VueCookies,{expires:'Session'});
 Vue.use(VueLazyLoad,{
   loading:'imgs/loading-svg/loading-bubbles.svg'
