@@ -40,14 +40,17 @@
             </div>
           </div>
         </div>
-        <el-pagination
+        <!-- <el-pagination
           class="pagination"
           background
           :pageSize='pageSize'
           layout="prev, pager, next"
           :total="total"
           @current-change="handleChange">
-        </el-pagination>   
+        </el-pagination>  -->  
+        <div class="loadmore" v-if="loadingMore">
+          <el-button  @click="loadMore" :loading="loading">加载更多</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -57,18 +60,19 @@
 import OrderHeader from '@/components/OrderHeader'
 import loading from '@/components/Loading'
 import Nodata from '@/components/Nodata'
-
+import {Button} from 'element-ui'
 import axios from 'axios'
 export default {
     name:'OrderList',
-    components:{OrderHeader,loading,Nodata},
+    components:{OrderHeader,loading,Nodata,[Button.name]:Button},
     data() {
       return {
         list:[],
-        loading:true,
-        pageSize:10,
+        loading:false,
+        pageSize:2,
         pageNum:1,
-        total:0
+        total:0,
+        loadingMore:true
       }
     },
     mounted() {
@@ -76,8 +80,10 @@ export default {
     },
     methods: {
       getOrderList(){
+        this.loading = true;
         axios.get('/orders',{
           params:{
+            pageSize:2,
             pageNum:this.pageNum
           }
         }).then(res=>{
@@ -100,6 +106,26 @@ export default {
       handleChange(pageNum){
         this.pageNum = pageNum
         this.getOrderList()
+      },
+      loadMore(){
+        this.pageNum++;
+        this.getList()
+      },
+      getList(){
+        this.loading = true
+        axios.get('/orders',{
+          params:{
+             pageSize:2,
+            pageNum:this.pageNum
+          }
+        }).then(res=>{
+          // console.log(res)
+          if(!res.hasNextPage){
+            this.loadingMore = false
+          }
+          this.loading = false
+          this.list = this.list.concat(res.list)
+        })
       }
     },
 }
@@ -169,6 +195,9 @@ export default {
           }
         }
       }
+    }
+    .loadmore{
+      text-align:center
     }
   }
 </style>
